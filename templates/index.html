@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Brochure Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 AI-Powered Company Brochure</h1>
+        <p>Generate a professional company brochure instantly with AI!</p>
+        <form action="/generate" method="POST">
+            <input type="text" name="company_name" placeholder="Company Name" required>
+            <input type="url" name="company_url" placeholder="Company Website URL" required>
+            <button type="submit">Generate Brochure</button>
+        </form>
+    </div>
+</body>
+</html>

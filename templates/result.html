@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brochure Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const output = document.getElementById("output");
+            const eventSource = new EventSource("/generate_brochure");
+
+            eventSource.onmessage = function (event) {
+                output.innerHTML += marked.parse(event.data);  // Convert Markdown to HTML
+            };
+
+            eventSource.onerror = function () {
+                eventSource.close();
+            };
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Brochure for <span id="company_name">{{ company_name }}</span></h1>
+        <p><strong>Website:</strong> <a href="{{ company_url }}" target="_blank">{{ company_url }}</a></p>
+        <div id="output" class="brochure-content"></div>
+        <a href="/" class="btn">Generate Another</a>
+    </div>
+</body>
+</html>
